@@ -42,7 +42,7 @@ and compare to
 """
 
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from platform import system
 
@@ -131,14 +131,10 @@ else:
     defaults["OS_TYPE"] = get_os()
 
 
-## Pull window for the E-mini option settlements from Databento, for the default
-## `doit`, which is also the backfill: the trailing week by default, as date
-## strings (each session is a minute or two to pull). Set START_DATE in .env
-## or in the environment to backfill further; the pull reruns when the window
-## changes. The daily update, `doit latest`, does not use this window:
-## `pull_es_options.py --latest` pulls the most recent session.
-defaults["START_DATE"] = (datetime.today() - timedelta(days=7)).strftime("%Y-%m-%d")
-defaults["END_DATE"] = datetime.today().strftime("%Y-%m-%d")
+## Reproducible backfill window, committed with the assignment. The daily
+## `doit latest` update independently fetches the most recent session.
+defaults["START_DATE"] = "2026-10-09"
+defaults["END_DATE"] = "2026-11-06"
 
 ## Credentials default to empty so that every module imports (and the test
 ## suite runs) on a machine with no .env, such as the grading runner.
