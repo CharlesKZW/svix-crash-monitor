@@ -131,10 +131,10 @@ else:
     defaults["OS_TYPE"] = get_os()
 
 
-## Reproducible backfill window, committed with the assignment. The daily
+## Backfill from the assignment's initial window through today. The daily
 ## `doit latest` update independently fetches the most recent session.
 defaults["START_DATE"] = "2026-10-09"
-defaults["END_DATE"] = "2026-11-06"
+defaults["END_DATE"] = datetime.today().strftime("%Y-%m-%d")
 
 ## Credentials default to empty so that every module imports (and the test
 ## suite runs) on a machine with no .env, such as the grading runner.
